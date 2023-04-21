@@ -21,7 +21,7 @@
             },
             isAtive(){
                 return this.$route.path.indexOf(this.path)==0
-            }
+            },
         },
     }
 </script>

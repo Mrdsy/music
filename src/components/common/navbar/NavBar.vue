@@ -5,8 +5,8 @@
             <img src="@/assets/img/music.png" alt="">
         </div>
         <span class="logoname">网易云音乐</span>
-        <div class="left"></div>
-        <div class="right"></div>
+        <div class="left" @click="left()"></div>
+        <div class="right" @click="right()"></div>
         <!-- 搜索 -->
         <el-input 
         ref="input"
@@ -40,12 +40,20 @@
             </div>
         </transition>
         <!-- 登入界面 -->
-        <div class="userlogo" @click="userlogin">
+
+        <div class="userlogo" @click="userlogin" >
             <el-avatar class="el-avatar" shape="circle"  fit="fit" :src="avatarUrl"></el-avatar>
             <span>{{nickname}}</span>
         </div>
         <transition>
-            <qrimgs v-if="isshow" @useclick="useclick" @usedata="usedata(arguments)"></qrimgs>
+        <div v-if="isshow"  >
+            <div v-if="isLogin">
+                <qrimgs @useclick="useclick" @usedata="usedata(arguments)" ></qrimgs>
+            </div>
+            <div v-if="isnoLogin">
+                <exit @outlogin="outlogin"></exit>
+            </div>
+        </div>
         </transition>
     </div>
 </template>
@@ -54,8 +62,9 @@
 import {gethotsearch} from '@/network/netnavbar/navbarhotsearch'
 import Login from "./other/Login.vue"
 import qrimgs from './other/qrimgs.vue'
-
+import Exit from './other/Exit.vue'
     export default {
+        inject:['reload'],
         data() {
             return {
                 input:'',
@@ -65,19 +74,29 @@ import qrimgs from './other/qrimgs.vue'
                 hotin:null,
                 isshow:false,
                 nickname:'登录',
-                avatarUrl:''
+                avatarUrl:'',
+                isdisabled:false,
+                isLogin:true,
+                isnoLogin:false
             }
         },
         components:{
             Login,
-            qrimgs
+            qrimgs,
+            Exit
         },
         created(){
             gethotsearch().then(res => {
                 const data=res.data
                 this.hounum=data.data
-                // console.log(this.hounum); 
             })
+            if(sessionStorage.getItem("cookie")){
+                this.nickname=sessionStorage.getItem("nickname")
+                this.avatarUrl=sessionStorage.getItem("avatarUrl")
+                this.isLogin=false
+                this.isnoLogin=true
+            }
+            
         },
         watch:{
 
@@ -102,14 +121,20 @@ import qrimgs from './other/qrimgs.vue'
             useclick(){
                 this.isshow=false
             },
+
             userlogin(){
                 this.isshow = true
             },
-            usedata(usedata){
-                this.nickname=usedata[0]
-                this.avatarUrl=usedata[1]
-                console.log(this.nickname);
-                console.log(this.avatarUrl);
+            left(){
+                this.reload();
+                this.$router.go(-1)
+            },
+            right(){
+                this.reload();
+                this.$router.go(+1)
+            },
+            outlogin(){
+                this.isshow=false
             }
         }
     }
@@ -251,4 +276,5 @@ import qrimgs from './other/qrimgs.vue'
     height: 14px;
     margin-left: 4px;
 }
+
 </style>

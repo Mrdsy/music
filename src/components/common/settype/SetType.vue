@@ -1,7 +1,7 @@
 <template>
     <div class="settype">
         <ul>
-            <li v-for="item in settype">
+            <li v-for="item in settype" @click="songlist(item.id)">
                 <img :src="item.picUrl" alt="">
                 <span>{{item.name}}</span>
             </li>
@@ -18,6 +18,11 @@
                 default(){
                     return []
                 }
+            }
+        },
+        methods:{
+            songlist(id){
+                this.$router.push('/songlist/'+id).catch(err => err)
             }
         }
     }

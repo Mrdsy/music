@@ -9,10 +9,8 @@ const ranking= () => import('../views/home/ability/ranking.vue')
 const singer= () => import('../views/home/ability/singer.vue')
 const newmusic= () => import('../views/home/ability/newmusic.vue')
 
-const qrimhs= ()=> import('../components/common/navbar/other/qrimgs.vue')
-
-
 const Podcast = () =>import('../views/podcast/Podcast.vue')
+const Songlist =()=> import('../views/songlist/Songlist.vue')
 
 Vue.use(VueRouter)
 const routes=[
@@ -26,7 +24,7 @@ const routes=[
         component:Home,
         children:[
             {
-                path:'',
+                path:'/',
                 redirect:'recommend',
             },
             {
@@ -59,6 +57,10 @@ const routes=[
         path:'/podcast',
         component:Podcast,
     },
+    {
+        path:'/songlist/:id',
+        component:Songlist,
+    }
 ]
 const router=new VueRouter({
     routes,

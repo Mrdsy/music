@@ -67,11 +67,24 @@ export function getcheck(key){
         }
     })
 }
+//获取获取登录状态
 export function getStatus(cookie){
     return request({
         url:'/login/status',
         params:{
             cookie
         }
+    })
+}
+//获取用户信息
+export function getaccount(){
+    return  request ({
+        url:'/user/subcount',
+    })
+}
+//退出登录
+export function logout(){
+    return  request ({
+        url:'/logout',
     })
 }

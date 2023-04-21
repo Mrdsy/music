@@ -11,3 +11,31 @@ export function getpersonalized(){
         url:'/personalized'
     })
 }
+//获得用户信息，歌单，收藏
+export function getplaylist(uid){
+    return request({
+        url:'/user/playlist',
+        params:{
+            uid,
+        }
+    })
+}
+// 获得歌单的所有歌曲
+export function getall(id,cookie){
+    return request({
+        url:'/playlist/detail',
+        params:{
+            id,
+            cookie
+        }
+    })
+}
+// 获得歌曲详情
+export function getsong(ids){
+    return request({
+        url:'/song/detail',
+        params:{
+            ids
+        }
+    })
+}

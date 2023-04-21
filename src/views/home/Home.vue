@@ -2,7 +2,6 @@
     <div>
         <home-tab-bar></home-tab-bar>
         <router-view></router-view>
-        
     </div>
 </template>
 

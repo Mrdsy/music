@@ -17,7 +17,7 @@
 <script>
 import Carousel from '@/components/common/carousel/Carousel.vue';
 import SetType from '@/components/common/settype/SetType.vue'
-import { getbanner,getpersonalized} from '@/network/home/nothome';
+import { getbanner,getpersonalized,getplaylist} from '@/network/home/nothome';
     export default {
         name:"recommend",
         components:{
@@ -27,27 +27,33 @@ import { getbanner,getpersonalized} from '@/network/home/nothome';
         data() {
             return {
                 banners:[],
-                settype:[]
+                settype:[],
+
             }
         },
         created(){
             getbanner().then(res => {
-                // console.log(res.data);
                 this.banners=res.data.banners
             })
             getpersonalized().then(res =>{
-                // console.log(res.data.result);
                 this.settype=res.data.result
+                console.log(this.settype);
             })
+            
+        },
+        mounted(){
+            
         },
         methods:{
             bgmclick(){
                 this.$router.push('songsheet')
+            },
+            getplaylist(userid){
+                getplaylist(userid).then(res=>{
+                    console.log(res);
+                })
             }
         },
-        watch:{
-            
-        }
     }
 </script>
 

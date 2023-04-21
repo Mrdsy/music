@@ -12,7 +12,7 @@
         </el-aside>
 
         <el-main>
-          <router-view></router-view>
+            <router-view v-if="isRouterAlive"/>
         </el-main>
 
       </el-container>
@@ -30,12 +30,26 @@ export default {
   data() {
     return {
       wth:'200px',
+      isRouterAlive:true
     }
   },
+  provide(){
+      return{
+        reload:this.reload
+      }
+    },
   components: {
     NavBar,
     MainAside,
-  }
+  },
+  methods:{
+      reload(){
+        this.isRouterAlive = false;
+        this.$nextTick(function () {
+          this.isRouterAlive = true;
+        });
+      }
+    },
 }
 </script>
 
