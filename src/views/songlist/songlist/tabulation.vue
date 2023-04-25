@@ -10,7 +10,7 @@
        
         <div class="song">
             <ul>
-                <li class="song-conter" v-for=" ( item , index) in song" @click="songclick(index)">
+                <li class="song-conter" v-for=" ( item , index) in song" @dblclick="songclick(index)">
                     <div class="num">{{ index+1 }}</div>
                     <div class="title">{{item.name}}</div>
                     <div class="singer">{{item.ar[0].name}}</div>
@@ -53,18 +53,24 @@ import {formatDuration} from '@/components/common/time'
                         this.song.push(res.data.songs[0])
                     })
                 }
-                 console.log(this.song);
             },
+            // 获得歌曲的详细信息
             getsong(id){
                 getsong(id).then(res =>{
                     console.log(res);
                 })
             },
+
             time(data){
                 return formatDuration(data)
             },
+
             songclick(index){
-                console.log(index+1);
+               this.$store.commit('emptysong')
+               this.$store.commit('addindex',index)
+               for (const iterator of this.song) {
+                this.$store.commit('addtrackIds',iterator)
+               }
             },
        },
        watch:{

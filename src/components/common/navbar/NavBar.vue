@@ -126,12 +126,12 @@ import Exit from './other/Exit.vue'
                 this.isshow = true
             },
             left(){
-                this.reload();
                 this.$router.go(-1)
+                this.reload();
             },
             right(){
-                this.reload();
                 this.$router.go(+1)
+                this.reload();
             },
             outlogin(){
                 this.isshow=false

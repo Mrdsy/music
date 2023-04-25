@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainaside">
         <Aside class="aside">
             <aside-item path="/home">
                 <div>发现音乐</div>
@@ -54,7 +54,11 @@ import {getplaylist} from '@/network/home/nothome'
 </script>
 
 <style scoped>
-
+.mainaside{
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
 .aside{
     margin-top: 12px;
 }

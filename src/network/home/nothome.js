@@ -39,3 +39,14 @@ export function getsong(ids){
         }
     })
 }
+//获取歌曲的url
+export function geturl(cookie,id){
+    return request({
+        url:'/song/url/v1',
+        params:{
+            cookie,
+            id,
+            level:'higher'
+        }
+    })
+}
