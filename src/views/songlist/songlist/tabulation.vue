@@ -10,8 +10,14 @@
        
         <div class="song">
             <ul>
-                <li class="song-conter" v-for=" ( item , index) in song" @dblclick="songclick(index)">
-                    <div class="num">{{ index+1 }}</div>
+                <li class="song-conter" v-for=" ( item , index) in song" @dblclick="songclick(index)"
+                :class="{active : item.id===$store.getters.viewsongid}">
+                    <div class="num">
+                        <div v-if="item.id!=$store.getters.viewsongid">
+                            {{ index+1 }}
+                        </div>
+                        <img src="@/assets/img/扬声器.png" alt="" v-if="item.id===$store.getters.viewsongid">
+                    </div>
                     <div class="title">{{item.name}}</div>
                     <div class="singer">{{item.ar[0].name}}</div>
                     <div class="album">{{ item.al.name }}</div>
@@ -44,7 +50,6 @@ import {formatDuration} from '@/components/common/time'
             }
         },
         created() {
-
         },
        methods:{
             getPhotoList (res) {
@@ -80,7 +85,9 @@ import {formatDuration} from '@/components/common/time'
         }
        },
         computed:{
-            
+            // recordsongid(){
+            //     return this.$store.commit('')
+            // }
         }
     }
 </script>
@@ -131,6 +138,7 @@ import {formatDuration} from '@/components/common/time'
 .num{
     position: absolute;
     left: 28px;
+
 }
 .el-icon-star-off{
     position: absolute;
@@ -144,5 +152,13 @@ import {formatDuration} from '@/components/common/time'
     left: 60px;
     cursor: pointer;
     z-index: 3;
+}
+.active{
+    color: red;
+}
+.num img{
+    width: 14px;
+    height: 14px;
+    margin-bottom: 3px;
 }
 </style>

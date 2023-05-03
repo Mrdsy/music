@@ -42,7 +42,6 @@ import {getplaylist} from '@/network/home/nothome'
             if(sessionStorage.getItem('cookie')){
                 getplaylist(this.userid).then(res =>{
                     this.playlist=res.data.playlist
-                    console.log(this.playlist);
                     this.isplaylist=true
                 })
             }

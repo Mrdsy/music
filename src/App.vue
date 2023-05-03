@@ -2,24 +2,23 @@
   <div id="app">
     <el-container class="app">
     <!-- 置顶导航 -->
-      <el-header>
+      <el-header @click.native="listclick">
         <nav-bar></nav-bar>
       </el-header>
       <!-- 侧边栏，和内容 -->
       <el-container>
-        <el-aside :width="wth">
+        <el-aside :width="wth" @click.native="listclick">
           <main-aside></main-aside>
         </el-aside>
 
-        <el-main>
+        <el-main @click.native="listclick">
             <router-view v-if="isRouterAlive"/>
         </el-main>
 
       </el-container>
       <!-- 底部 -->
-      
-        <el-footer>
-          <musicplayer></musicplayer>
+        <el-footer height="80px">
+          <musicplayer :playerclick="playerclick" @click.native="playclick"></musicplayer>
         </el-footer>
     </el-container>
   </div>
@@ -34,7 +33,9 @@ export default {
   data() {
     return {
       wth:'200px',
-      isRouterAlive:true
+      he:'70px',
+      isRouterAlive:true,
+      playerclick:true
     }
   },
   provide(){
@@ -53,6 +54,12 @@ export default {
         this.$nextTick(function () {
           this.isRouterAlive = true;
         });
+      },
+      listclick(){
+        this.playerclick=false
+      },
+      playclick(){
+        this.playerclick=true
       }
     },
 }

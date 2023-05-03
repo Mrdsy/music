@@ -120,6 +120,7 @@ import { formatDate } from '@/components/common/time/index'
     display: flex;
     line-height: 20px;
 }
+
 .types{
     width: 35px;
     height: 20px;

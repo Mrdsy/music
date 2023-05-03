@@ -46,14 +46,14 @@
             <span>{{nickname}}</span>
         </div>
         <transition>
-        <div v-if="isshow"  >
-            <div v-if="isLogin">
-                <qrimgs @useclick="useclick" @usedata="usedata(arguments)" ></qrimgs>
+            <div v-if="isshow"  >
+                <div v-if="isLogin">
+                    <qrimgs @useclick="useclick" @usedata="usedata(arguments)" ></qrimgs>
+                </div>
+                <div v-if="isnoLogin">
+                    <exit @outlogin="outlogin"></exit>
+                </div>
             </div>
-            <div v-if="isnoLogin">
-                <exit @outlogin="outlogin"></exit>
-            </div>
-        </div>
         </transition>
     </div>
 </template>

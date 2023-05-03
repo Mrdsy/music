@@ -35,12 +35,11 @@ import tabulation from './songlist/tabulation.vue'
             songsId(){
                 this.id=this.$route.params.id
                 let cookie=sessionStorage.getItem('cookie')
-                //清空vuex存储的歌单
-                this.$store.commit('emptysong')
                 getall(this.id,cookie).then(res =>{
                     this.songdata=res.data.playlist
                     //歌单的所有歌曲
                     this.songid=res.data.playlist.trackIds
+                    this.$store.commit('addindex',null)
                 })
             }
         },
@@ -57,7 +56,13 @@ import tabulation from './songlist/tabulation.vue'
     height: 100%; */
     overflow: hidden;
     overflow-y:scroll;
-
-
+}
+.song::-webkit-scrollbar{
+    width: 5px;
+}
+/* 滚动的滑块 */
+.song::-webkit-scrollbar-thumb{
+    background-color: #BEBEBE;
+    border-radius: 20px;
 }
 </style>
